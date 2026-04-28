@@ -1,0 +1,24 @@
+# Compiled MQL5 files
+*.ex5
+*.ex4
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*~
+
+# Cache directories
+.cache/
+
+# VSCode settings
+.vscode/
+
+# MetaTrader project files
+*.mqproj
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
