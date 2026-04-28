@@ -23,6 +23,9 @@ private:
    string            m_btnTeste2Name;
    string            m_labelName;
 
+   //--- [TAG: UI_INIT] Gerenciamento de tabs
+   int               m_active_tab = 0;
+
 public:
                      CUIApp(void);
                     ~CUIApp(void);
@@ -52,6 +55,9 @@ private:
    bool              CreateWindow(void);
    bool              CreateTestButton(void);
    void              DestroyGUI(void);
+
+   //--- [TAG: UI_INIT] Gerenciamento de tabs
+   void              ShowTab(int index);
   };
 
 //+------------------------------------------------------------------+
@@ -199,7 +205,9 @@ bool CUIApp::Init(CAppController* appController)
    //--- OBS: A lógica de resposta ao clique deverá ser tratada no dispatcher de eventos
    //--- (não alterado aqui conforme regra). Os objetos existem e têm nomes fixos.
 
-   // [END TAG: UI_INIT]
+// [END TAG: UI_INIT]
+
+   ShowTab(0);
 
    m_initialized = true;
    ShowWindow();
@@ -338,6 +346,27 @@ void CUIApp::DestroyGUI(void)
    ObjectDelete(0, m_btnTesteName);
    ObjectDelete(0, m_btnTeste2Name);
    ObjectDelete(0, m_labelName);
+  }
+
+//+------------------------------------------------------------------+
+//| ShowTab - Gerencia visibilidade dos painéis de tabs              |
+//+------------------------------------------------------------------+
+void CUIApp::ShowTab(int index)
+  {
+   m_active_tab = index;
+
+   if(index == 0)
+     {
+      ObjectSetInteger(0, "panel_tab1", OBJPROP_HIDDEN, false);
+      ObjectSetInteger(0, "panel_tab2", OBJPROP_HIDDEN, true);
+      ObjectSetInteger(0, "panel_tab2_label", OBJPROP_HIDDEN, true);
+     }
+   else if(index == 1)
+     {
+      ObjectSetInteger(0, "panel_tab1", OBJPROP_HIDDEN, true);
+      ObjectSetInteger(0, "panel_tab2", OBJPROP_HIDDEN, false);
+      ObjectSetInteger(0, "panel_tab2_label", OBJPROP_HIDDEN, false);
+     }
   }
 
 //+------------------------------------------------------------------+
